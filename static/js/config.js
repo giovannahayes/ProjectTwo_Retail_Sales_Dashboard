@@ -1,0 +1,2 @@
+//mapbox
+token = 'pk.eyJ1IjoicGFmdW1pZyIsImEiOiJja2lncnhrbDcwMHhqMnFxcXYweXBsaTFuIn0.G6deejyMXzWPQ_ceL_5fuQ'

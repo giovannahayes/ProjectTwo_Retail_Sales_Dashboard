@@ -258,3 +258,212 @@ document.getElementById("dateInput").addEventListener("change", function() {
       }).catch(function(error) {
         console.log(error);
       });
+
+      //line chart days
+// let url = base_url
+// let xl = []
+// let yl = []
+// Plotly.d3.json(url, function(figure){
+//   console.log(figure);
+//   let data = figure.data;
+//   console.log(data);
+//   for (var i=0; i< figure.length; i++){
+//     //console.log(figure[i]);
+//     xl.push(figure[i]["Date"])
+//     yl.push(figure[i]["Weekly_Sales"]) }
+//     let trace = {
+//       x: xl,
+//       y: yl,
+//     }
+// Plotly.plot(document.getElementById('line'), [trace]);
+
+
+
+
+   
+// // )})
+// // create a bar chart
+// function buildChart(base_url) {
+// // d3.json(url);
+// d3.json(base_url).then(function(data) {
+//   console.log(data);
+// data.forEach(function(data) {
+//   data.sales = +data.Weekly_Sales;
+//   data.departments = +data.Dept;
+// });
+// // d3.json('/Trainjson').then(function(salesData) {
+// //   console.log(salesData);
+//   // log a list of names
+//   var dept = data.map(data => data.Dept);
+//   console.log("Dept", dept);
+//   // Cast each hours value in tvData as a number using the unary + operator
+//   data.forEach(function(data) {
+//     //data.weeklysales = +data.weeklysales;
+//     console.log("Dept:", data.Dept);
+//     console.log("Weekly_Sales:", data.Weekly_Sales);
+//   });
+// }).catch(function(error) {
+//   console.log(error);
+// });
+// //create bar chart
+// // Define SVG area dimensions
+// var svgWidth = 960;
+// var svgHeight = 660;
+// // Define the chart's margins as an object
+// var chartMargin = {
+// top: 30,
+// right: 30,
+// bottom: 30,
+// left: 30
+// };
+// // Define dimensions of the chart area
+// var chartWidth = svgWidth - chartMargin.left - chartMargin.right;
+// var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;
+// // Select body, append SVG area to it, and set the dimensions
+// var svg = d3
+// .select("#bar")
+// .append("svg")
+// .attr("height", svgHeight)
+// .attr("width", svgWidth);
+// // Append a group to the SVG area and shift ('translate') it to the right and down to adhere
+// // to the margins set in the "chartMargin" object.
+// var chartGroup = svg.append("g")
+// .attr("transform", `translate(${chartMargin.left}, ${chartMargin.top})`);
+// // Load data from hours-of-tv-watched.csv
+// d3.json(url).then(function(salesData) {
+// // Print the tvData
+// console.log(salesData);
+// // Cast the hours value to a number for each piece of tvData
+// salesData.forEach(function(data) {
+//   data.Weekly_Sales //= +data.weeklysales;
+// });
+// var barSpacing = 10; // desired space between each bar
+// var scaleY = 10; // 10x scale on rect height
+// // Create a 'barWidth' variable so that the bar chart spans the entire chartWidth.
+// var barWidth = (chartWidth - (barSpacing * (salesData.length - 1))) / salesData.length;
+// // @TODO
+// // Create code to build the bar chart using the Data.
+// chartGroup.selectAll(".bar")
+//   .data(data)
+//   .enter()
+//   .append("rect")
+//   .classed("bar", true)
+//   .attr("width", d => barWidth)
+//   .attr("height", d => d.Dept * scaleY)
+//   .attr("x", (d, i) => i * (barWidth + barSpacing))
+//   .attr("y", d => chartHeight - d.Dept * scaleY);
+// }).catch(function(error) {
+// console.log(error);
+// })}});
+
+
+
+
+
+// This needs to be a function
+// function demoBox(sample){
+//   d3.json("samples.json").then((sampleData) => {
+      
+//       var data = sampleData;
+  
+  
+//       // Create an array of names
+//       // var names = data.names;
+  
+  
+//       // Create an array of objects and push it to the globally available variables
+//       var metadata = data.metadata;
+//       var dataArrays= metadata.filter(samplesObj => samplesObj.id == sample);
+//       var dataResult = dataArrays[0];
+//       var PANEL = d3.select("#sample-metadata");
+//       // metadata.forEach(obj => metadataObj.push(obj));
+//       PANEL.html("");
+  
+//       // Create an array of objects and push it to the globally available variables
+//       // var samples = data.samples;
+//       // samples.forEach(obj => samplesObj.push(obj));
+//       Object.entries(dataResult).forEach(([key, value])=>{
+//           PANEL.append('h6').text(`${key}:${value}`);
+//       })
+//       buildMyguagecharts(dataResult.wfreq);
+//   });
+//   }
+  
+// function buildMycharts(sample){
+//     d3.json(base_url).then((data) =>{
+//         //var samples = data.samples;
+//         //var filterArray = samples.filter(samplesObj => samplesObj.Dept == sample);
+//         //var dataResults =  filterArray[0]
+//         var dataResults =  data
+
+//         var otuIds = dataResults.Dept;
+//         var sampleVals = dataResults.Weekly_Sales;
+//         //var otuLabels = dataResults.otu_labels;
+
+//         var idResults = [];
+//         otuIds.forEach(function (id,i){ 
+//         var newObj = {};
+//         newObj.otu_id = id;
+//         newObj.sample_value = sampleVals[i];
+//         //newObj.otu_label = otuLabels[i];
+//         idResults.push(newObj);
+    
+
+//         // Sort the objects by sample_value and then slice the top ten
+//         var sortedById = idResults.sort((a,b) => b.sample_value - a.sample_value);
+//         var slicedTopTen = sortedById.slice(0,10);
+//         var reversedTopTen = slicedTopTen.reverse();
+        
+
+//         //Top Ten Data
+//         var trace1 = {
+//             x: reversedTopTen.map(row => row.sample_value),
+//             y: reversedTopTen.map(row => `OTU ${row.otu_id}`),
+//             text: reversedTopTen.map(row => row.otu_label),
+//             name: `id: ${id}`,
+//             marker:{
+//                 'color': reversedTopTen.map(row => row.otu_id),
+//                 'colorscale': 'Portland'
+//             },
+//             type: "bar",
+//             orientation: "h"
+//         };
+
+//         // data to be used for the plot
+//         var chartData = [trace1];
+
+//         // group bar mode to the layout
+//         var layout = {
+//             title: `id: ${id} Bacteria Presence`,
+//             hoverlabel:{
+//                 bgcolor: "black",
+//                 font: {color: 'white'}
+//             },
+//             margin: {
+//             l: 70,
+//             r: 70,
+//             t: 30,
+//             b: 100
+//             }
+//         };
+
+//         Plotly.newPlot("bar-plot", chartData, layout);
+//         return reversedTopTen;
+
+        
+//         });
+        
+//     });
+    
+
+// }})
+
+
+//var url='http://localhost:9090/api/test';
+
+// d3.json(base_url, function(error, data) {
+//   if (error) return console.warn(error);
+//   var layout = {barmode: 'group'};
+  
+//  Plotly.newPlot("bar-plot", data.data, layout);
+// });})
