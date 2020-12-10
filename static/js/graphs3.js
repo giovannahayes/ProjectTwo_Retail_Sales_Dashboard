@@ -336,11 +336,12 @@ Plotly.d3.json(url, function(figure){
     type: "choroplethmapbox", name: "US states",
     locations: [newlist],
    z: [sales_values],
-   geojson: 'C:/Users/Brian/Desktop/ProjectTwo_Retail_Sales_Dashboard/Resources_New/Walmart2010_Geojson.geojson',
+   geojson: 'https://raw.githubusercontent.com/giovannahayes/ProjectTwo_Retail_Sales_Dashboard/main/Walmart2010_Geojson.geojson',
    zmin: 25, zmax: 280, colorbar: {y: 0, yanchor: "bottom", title: {text: "US states", side: "right"}}}
     ];
    
-   var layout = {mapbox: {style: "dark", center: {lon: -110, lat: 50}, zoom: 0.8}, width: 600, height: 400, margin: {t: 0, b: 0}};
+  var layout = {mapbox: {center: {lon: -74, lat: 43}, zoom: 3.5},
+    width: 600, height:400};
    
    var config = {mapboxAccessToken: "pk.eyJ1IjoicGFmdW1pZyIsImEiOiJja2lncnhrbDcwMHhqMnFxcXYweXBsaTFuIn0.G6deejyMXzWPQ_ceL_5fuQ"};
    
