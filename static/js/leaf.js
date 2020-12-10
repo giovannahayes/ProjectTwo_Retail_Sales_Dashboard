@@ -65,6 +65,7 @@ zoom: 4
 
 var month = monthYear[1]
 
+
 //console.log(month)
 //the numbers rep colors...
 // Function that will determine the color 
@@ -88,7 +89,7 @@ var filters = ['==', 'month', month];
 map.setFilter('2010', filters);
 map.setFilter('2011', filters);
 map.setFilter('2012', filters);
-
+}
  
 // Set the label to the month
 //document.getElementById('Month').textContent = [month];
@@ -97,17 +98,17 @@ map.setFilter('2012', filters);
 
 //starting to build the layers
 //the line below loads all the layers 
-map.on('load', function() {
+//map.on('load', function() {
  
 
-$.getJSON('https://raw.githubusercontent.com/giovannahayes/ProjectTwo_Retail_Sales_Dashboard/main/Walmart2010_Geojson.geojson', function(data) {
-
+var urla = 'https://raw.githubusercontent.com/giovannahayes/ProjectTwo_Retail_Sales_Dashboard/main/Walmart2010_Geojson.geojson'
+d3.json(urla).then ( function(data) {
 data.features = data.features.map(function(d) {
 d.properties.month = (d.properties.Month)
 d.properties.sales = MapToSales(d.properties.Monthly_Sales)
 return d;
 });
-console.log(data)
+
 map.addSource('2010', {
 'type': 'geojson',
 data: data
@@ -137,29 +138,29 @@ map.addLayer({
 // 0 = January
 filterBy(1);
 
-document.getElementById('slider').addEventListener('input', function(e) {
-var month = parseInt(e.target.value, 10);
-filterBy(month);
-});
+//document.getElementById('slider').addEventListener('input', function(e) {
+//var month = parseInt(e.target.value, 10);
+//filterBy(month);
+//});
 
 });
 
-$.getJSON('https://raw.githubusercontent.com/giovannahayes/ProjectTwo_Retail_Sales_Dashboard/main/Walmart2011Geojson.geojson', function(data) {
-
+var urlb = 'https://raw.githubusercontent.com/giovannahayes/ProjectTwo_Retail_Sales_Dashboard/main/Walmart2011Geojson.geojson'
+d3.json(urlb).then ( function(data) {
 data.features = data.features.map(function(d) {
 d.properties.month = (d.properties.Month)
 d.properties.sales = MapToSales(d.properties.Monthly_Sales)
 return d;
 });
-map.addSource('sales2011', {
+map.addSource('2011', {
 'type': 'geojson',
 data: data
-});
 
+});
 map.addLayer({
-'id': 'sales2011',
+'id': '2011',
 'type': 'fill',
-'source': 'sales2011',
+'source': '2011',
 'layout': {},
 'paint': {
 'fill-color':[
@@ -180,30 +181,31 @@ map.addLayer({
 // 0 = January
 filterBy(1);
 
-document.getElementById('slider').addEventListener('input', function(e) {
-var month = parseInt(e.target.value, 10);
-filterBy(month);
-});
+//document.getElementById('slider').addEventListener('input', function(e) {
+//var month = parseInt(e.target.value, 10);
+//filterBy(month);
+//});
 
 });
 
-
-$.getJSON('https://raw.githubusercontent.com/giovannahayes/ProjectTwo_Retail_Sales_Dashboard/main/Walmart2012Geojson.geojson', function(data) {
+var urlc = 'https://raw.githubusercontent.com/giovannahayes/ProjectTwo_Retail_Sales_Dashboard/main/Walmart2012Geojson.geojson'
+ d3.json(urlc,function(data) {
 
     data.features = data.features.map(function(d) {
     d.properties.month =  (d.properties.Month)
     d.properties.sales = MapToSales(d.properties.Monthly_Sales)
     return d;
 });
-map.addSource('sales2012', {
+//console.log(data)
+map.addSource('2012', {
 'type': 'geojson',
 data: data
 });
  
 map.addLayer({
-'id': 'sales2012',
+'id': '2012',
 'type': 'fill',
-'source': 'sales2012',
+'source': '2012',
 'layout': {},
 'paint': {
 'fill-color':[
@@ -224,15 +226,15 @@ map.addLayer({
 // 0 = January
 filterBy(1);
  
-document.getElementById('slider').addEventListener('input', function(e) {
-var month = parseInt(e.target.value, 10);
-filterBy(month);
-});
+//document.getElementById('slider').addEventListener('input', function(e) {
+//var month = parseInt(e.target.value, 10);
+//filterBy(month);
+//});
 
 });
 
-
+//L.Layergroup
 
  
 
-})}})
+})
