@@ -6,11 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Retail Sales</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <!-- For Mapbox -->
-  <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
-  <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
-  <!-- <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> -->
   <style>
+    
+    body {background-color: lightgray;}
     title {
       text-align: center;
     }
@@ -26,11 +24,8 @@
   </style>
 </head>
 <body>
-
     <!-- The div that holds our map -->
     <!-- <div id="map"></div> -->
-
-
   <div class="container">
     <div class="row">
       <div class="col-md-12 jumbotron text-center">
@@ -62,7 +57,6 @@
       </div>
     </div>
       <div id="chlor">
-    <!--  <div id='map' style='width: 400px; height: 300px;'></div>-->
     </div>
   </div>
       <!-- Leaflet JavaScript -->
@@ -75,27 +69,11 @@
     <!-- API key -->
     <script type="text/javascript" src="static/js/config.js"></script>
     <!-- Our JavaScript -->
-    <script type="text/javascript" src="static/js/graphs3.js"></script>
+    <script type="text/javascript" src="static/js/logic.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-  <!-- Our JQuery -->
-  <script src="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js"></script>
-  <!-- <script src="jquery.mapbox.js"></script>
-  <script src="jquery-3.5.1.js"></script> -->
-  <script type="text/javascript" src="script.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <!-- <script src="app.js"></script> -->
   <script src="{{ url_for('static', filename='js/graphs3.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/leaf.js') }}"></script>
-  <script src="{{ url_for('static', filename='Resources_New/Walmart2010_Geojson.js') }}"></script>
-  <script src="{{ url_for('static', filename='Resources_New/Walmart2011Geojson.js') }}"></script>
-  <script src="{{ url_for('static', filename='Resources_New/Walmart2012Geojson.js') }}"></script>
-  
 </body>
 </html>
-
-
-

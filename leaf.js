@@ -7,7 +7,7 @@ document.getElementById("dateInput").addEventListener("change", function() {
 
 
 
-mapboxgl.accessToken = 'pk.eyJ1IjoicGFmdW1pZyIsImEiOiJja2lncnhrbDcwMHhqMnFxcXYweXBsaTFuIn0.G6deejyMXzWPQ_ceL_5fuQ';
+mapboxgl.accessToken = 'pk.eyJ1IjoicG9vamEwNzE2IiwiYSI6ImNraG1sZ20xYjFqcGcyenBoOHlpdXZkMWcifQ.YVWr7JRtKOyWuFvsADtE1w';
 var map = new mapboxgl.Map({
 container: 'map',
 style: 'mapbox://styles/mapbox/streets-v11',
@@ -30,7 +30,7 @@ zoom: 4
 // 'December'
 // ];
 
-// function MapToMonth(banana){
+// function MapToMonth(Month){
 //     var month = monthYear[1]
 
 //     // switch(month){
@@ -65,9 +65,10 @@ zoom: 4
 
 var month = monthYear[1]
 
-console.log(month)
+
+//console.log(month)
 //the numbers rep colors...
-// Function that will determine the color of a COUNTY based on the CORN Bushels
+// Function that will determine the color 
 function MapToSales(Monthly_Sales) {
   if (Monthly_Sales < 5800000) {
       return 1;
@@ -88,27 +89,27 @@ var filters = ['==', 'month', month];
 map.setFilter('2010', filters);
 map.setFilter('2011', filters);
 map.setFilter('2012', filters);
-
+}
  
 // Set the label to the month
-document.getElementById('Month').textContent = [month];
-}
+//document.getElementById('Month').textContent = [month];
+//}
 
 
 //starting to build the layers
 //the line below loads all the layers 
-map.on('load', function() {
+//map.on('load', function() {
  
 
-$.getJSON('Resources_New/Walmart2010_Geojson.geojson', function(data) {
-
+var urla = 'https://raw.githubusercontent.com/giovannahayes/ProjectTwo_Retail_Sales_Dashboard/main/Walmart2010_Geojson.geojson'
+d3.json(urla).then ( function(data) {
 data.features = data.features.map(function(d) {
 d.properties.month = (d.properties.Month)
 d.properties.sales = MapToSales(d.properties.Monthly_Sales)
 return d;
 });
-console.log(d.properties.Month)
-map.addSource('sales2010', {
+
+map.addSource('2010', {
 'type': 'geojson',
 data: data
 });
@@ -116,7 +117,7 @@ data: data
 map.addLayer({
 'id': '2010',
 'type': 'fill',
-'source': 'sales2010',
+'source': '2010',
 'layout': {},
 'paint': {
 'fill-color':[
@@ -137,29 +138,29 @@ map.addLayer({
 // 0 = January
 filterBy(1);
 
-document.getElementById('slider').addEventListener('input', function(e) {
-var month = parseInt(e.target.value, 10);
-filterBy(month);
-});
+//document.getElementById('slider').addEventListener('input', function(e) {
+//var month = parseInt(e.target.value, 10);
+//filterBy(month);
+//});
 
 });
 
-$.getJSON("Resources_New/Walmart2011Geojson.geojson", function(data) {
-
+var urlb = 'https://raw.githubusercontent.com/giovannahayes/ProjectTwo_Retail_Sales_Dashboard/main/Walmart2011Geojson.geojson'
+d3.json(urlb).then ( function(data) {
 data.features = data.features.map(function(d) {
-d.properties.month = MapToMonth(d.properties.Month)
+d.properties.month = (d.properties.Month)
 d.properties.sales = MapToSales(d.properties.Monthly_Sales)
 return d;
 });
-map.addSource('sales2011', {
+map.addSource('2011', {
 'type': 'geojson',
 data: data
-});
 
+});
 map.addLayer({
 'id': '2011',
 'type': 'fill',
-'source': 'sales2011',
+'source': '2011',
 'layout': {},
 'paint': {
 'fill-color':[
@@ -178,24 +179,25 @@ map.addLayer({
 });
 // Set filter to first month of the year
 // 0 = January
-filterBy(0);
+filterBy(1);
 
-document.getElementById('slider').addEventListener('input', function(e) {
-var month = parseInt(e.target.value, 10);
-filterBy(month);
+//document.getElementById('slider').addEventListener('input', function(e) {
+//var month = parseInt(e.target.value, 10);
+//filterBy(month);
+//});
+
 });
 
-});
-
-
-$.getJSON("Resources_New/Walmart2012Geojson.geojson", function(data) {
+var urlc = 'https://raw.githubusercontent.com/giovannahayes/ProjectTwo_Retail_Sales_Dashboard/main/Walmart2012Geojson.geojson'
+ d3.json(urlc,function(data) {
 
     data.features = data.features.map(function(d) {
-    d.properties.month = MapToMonth(d.properties.Month)
+    d.properties.month =  (d.properties.Month)
     d.properties.sales = MapToSales(d.properties.Monthly_Sales)
     return d;
 });
-map.addSource('sales2012', {
+//console.log(data)
+map.addSource('2012', {
 'type': 'geojson',
 data: data
 });
@@ -203,7 +205,7 @@ data: data
 map.addLayer({
 'id': '2012',
 'type': 'fill',
-'source': 'sales2012',
+'source': '2012',
 'layout': {},
 'paint': {
 'fill-color':[
@@ -222,43 +224,17 @@ map.addLayer({
 });
 // Set filter to first month of the year
 // 0 = January
-filterBy(0);
+filterBy(1);
  
-document.getElementById('slider').addEventListener('input', function(e) {
-var month = parseInt(e.target.value, 10);
-filterBy(month);
-});
+//document.getElementById('slider').addEventListener('input', function(e) {
+//var month = parseInt(e.target.value, 10);
+//filterBy(month);
+//});
 
 });
 
+//L.Layergroup
 
-// var toggleableLayerIds = [ '2010', '2011', '2012' ];
  
-// for (var i = 0; i < toggleableLayerIds.length; i++) {
-// var id = toggleableLayerIds[i];
- 
-// var link = document.createElement('a');
-// link.href = '#';
-// link.className = 'active';
-// link.textContent = id;
- 
-// link.onclick = function (e) {
-// var clickedLayer = this.textContent;
-// e.preventDefault();
-// e.stopPropagation();
- 
-// var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
- 
-// if (visibility === 'visible') {
-// map.setLayoutProperty(clickedLayer, 'visibility', 'none');
-// this.className = '';
-// } else {
-// this.className = 'active';
-// map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
-// }
-// };
- 
-// var layers = document.getElementById('menu');
-// layers.appendChild(link);
-// }
-});})
+
+})

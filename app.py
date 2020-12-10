@@ -10,23 +10,18 @@ from flask import Flask, jsonify
 import datetime as dt
 from flask import render_template
 import json
-#import simplejson as json
+
 # setup databases
 engine = create_engine(
-    "postgresql://postgres:Thegirls5!@localhost:5432/RetailDashboard2")
+    "postgresql://postgres:Pooja12345#@localhost:5432/RetailDashboard")
 Base = automap_base()
 Base.prepare(engine, reflect=True)
 Train = Base.classes.Train
 # Flask Setup
 app = Flask(__name__)
-# DB_URL = 'postgresql://postgres:Thegirls5!@localhost:5432/RetailDashboard2' #.format(user=POSTGRES_USER,pw=POSTGRES_PW,url=POSTGRES_URL,db=POSTGRES_DB)
-# app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # silence the deprecation warning
-# db = SQLAlchemy(app)
 session = Session(engine)
-# app.config.from_object(os.environ['APP_SETTINGS'])
-#app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-#db = SQLAlchemy(app)
+
+#setup routes
 @app.route('/')
 def welcome():
     """List all available api routes."""
@@ -35,7 +30,7 @@ def welcome():
         f"<a href='http://127.0.0.1:5000/api/v1.0/Trainjson'>/api/v1.0/Trainjson</a><br>"
         f"<a href='http://127.0.0.1:5000/api/v1.0/Dashboard'>/api/v1.0/Dashboard</a><br>"
     )
-# json object route
+# json object routes
 @app.route("/api/v1.0/Trainjson/")
 @app.route("/api/v1.0/Trainjson/<year>/<month>")
 @app.route("/api/v1.0/Trainjson/<year>")
@@ -56,6 +51,7 @@ def Trainjson(year=None, month=None):
         Train.Month,
         Train.Year
     ]
+    #control the items returned in the json based on user input
     if year and month:
         results = session.query(*return_items).\
             filter(Train.Year == int(year)).\
@@ -68,7 +64,7 @@ def Trainjson(year=None, month=None):
             filter(Train.Month == int(month)).all()
     else:
         results = []
-        # Convert list of tuples into list
+        # Convert list of tuples into list and jsonify
     all_data = []
     for result in results:
         sales_dict = {}
@@ -86,6 +82,8 @@ def Trainjson(year=None, month=None):
         sales_dict["Year"] = result[11]
         all_data.append(sales_dict)
     return jsonify(all_data)
+
+#route where html housing dashboard will live
 @app.route('/api/v1.0/Dashboard')
 def showDashboard():
     return render_template('index.html')
